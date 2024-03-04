@@ -1,1 +1,1 @@
-# spring-ws-demo
+See https://dastalvi.com/blog/spring-ws-demo/
