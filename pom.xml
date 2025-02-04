@@ -15,7 +15,7 @@
     <description>spring-ws-demo</description>
     <properties>
         <java.version>21</java.version>
-        <kotlin.version>1.9.24</kotlin.version>
+        <kotlin.version>2.0.21</kotlin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -45,28 +45,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jvnet.jaxb</groupId>
-                <artifactId>jaxb-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <executions>
-                    <execution>
-                        <id>schema-generate</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <schemaLanguage>WSDL</schemaLanguage>
-                            <generatePackage>com.example.springwsdemo.gen</generatePackage>
-                            <schemaDirectory>src/main/wsdl</schemaDirectory>
-                            <generateDirectory>${project.build.directory}/generated-sources</generateDirectory>
-                            <schemaIncludes>
-                                <include>*.wsdl</include>
-                            </schemaIncludes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
@@ -75,6 +53,7 @@
                 <executions>
                     <execution>
                         <id>compile</id>
+                        <phase>process-sources</phase>
                         <goals>
                             <goal>compile</goal> <!-- You can skip the <goals> element
                         if you enable extensions for the plugin -->
@@ -109,6 +88,28 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>4.0.0</version>
+                <executions>
+                    <execution>
+                        <id>schema-generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaLanguage>WSDL</schemaLanguage>
+                            <generatePackage>com.example.springwsdemo.gen</generatePackage>
+                            <schemaDirectory>src/main/wsdl</schemaDirectory>
+                            <generateDirectory>${project.build.directory}/generated-sources</generateDirectory>
+                            <schemaIncludes>
+                                <include>*.wsdl</include>
+                            </schemaIncludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
